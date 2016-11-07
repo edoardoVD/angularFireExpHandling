@@ -15,14 +15,19 @@ export class AppComponent {
 
   ngOnInit() {
     console.log('testing here');
-    this._af.database.list('items').push({some: 'data'})
-      .then(resolve => {
-        console.log('all good');
-      }, reject => {
-        console.log('error');
+
+    var pushingToList = this._af.database.list('items').push(null);
+    console.log('push list test', pushingToList);
+
+    
+    var settingObject = this._af.database.object('someObj').set(null);
+    console.log('push object test', settingObject);
+
+    settingObject
+      .then(() => {
+        console.log('setting Object OK');
+      }).catch(e => {
+        console.log('Catched object set:' + e.message);
       })
-      .catch(reject => {
-        console.log('catch');
-      });
   }
 }
